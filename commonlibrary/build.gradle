@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //RxJava 和 RxAndroid ,rxBinding
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.x.y'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0' //用于处理UI 例如重复点击
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0' //    //Gson 库
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'//转换器，请求结果转换成Model
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    api 'org.greenrobot:eventbus:3.1.1'
+    // ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+}
