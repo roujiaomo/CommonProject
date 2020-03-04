@@ -1,9 +1,9 @@
 # CommonProject
 基类项目
 
-使用: 
+如何使用： 
 
-1.在项目根build.gradle加入: 
+1.在项目根build.gradle加入： 
 ```
 	allprojects {
 		repositories {
@@ -13,7 +13,7 @@
 	}
   
  ``` 
-2. 在app的build.gradle 加入:
+2. 在app的build.gradle 加入：
 	
 ```
   dataBinding {
@@ -21,7 +21,7 @@
     }
 ```
 
-3. 在app的build.gradle 加入:
+3. 在app的build.gradle 加入：
 
 ```
 dependencies {
