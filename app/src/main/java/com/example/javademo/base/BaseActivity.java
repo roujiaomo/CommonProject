@@ -1,16 +1,16 @@
 package com.example.javademo.base;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-
+import com.blankj.utilcode.util.ActivityUtils;
 import com.example.javademo.constant.LoadStatus;
+import com.example.javademo.databinding.ActivityBaseBinding;
 import com.example.javademo.widget.LoadStatusLiveData;
 import com.example.javademo.widget.LoadingDialog;
 
@@ -23,6 +23,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
     private LoadingDialog loadingDialog;
     public VM mViewModel;
     public DB mBinding;
+    public ActivityBaseBinding activityBaseBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,10 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
             initLoadStatus(); //数据请求状态
         }
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        initView(mBinding);//初始化布局
+        //未封装title栏
+//       activityBaseBinding = DataBindingUtil.setContentView(this, R.layout.activity_base);
+//       LayoutInflater.from(this).inflate(getLayoutId(), activityBaseBinding.flContentView);
+        initView();//初始化布局
         initData(); //初始化数据
         initLiveDataObserve(); //请求返回数据处理
     }
@@ -82,18 +86,42 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
 
     /**
      * 初始化界面
-     * @param bindView 界面绑定对象
      */
-    public abstract void initView(DB bindView);
+    public abstract void initView();
 
     public abstract void initData();
 
     public abstract void initLiveDataObserve();
 
+    /**
+     * 是否显示网络请求时进度条
+     * @return
+     */
     public boolean isShowLoadStatus(){
         return true;
     }
 
+    /**
+     *  退出程序 供HomeActivity页使用
+     */
+    public void exit(){
+        ActivityUtils.getActivityList().clear();
+        System.exit(0);
+    }
+
+
+    /**
+     * 适配框架
+     * @return
+     */
+//    @Override
+//    public Resources getResources() {
+//        //需要升级到 v1.1.2 及以上版本才能使用 AutoSizeCompat
+//        AutoSizeCompat.autoConvertDensityOfGlobal((super.getResources());//如果没有自定义需求用这个方法
+//        AutoSizeCompat.autoConvertDensity((super.getResources(), 667, false);//如果有自定义需求就用这个方法
+//        return super.getResources();
+//    }
+//
     private  Class<VM>  getVMClass(){
         ParameterizedType type= (ParameterizedType) getClass().getGenericSuperclass();
         Type[] actualTypeArguments = type.getActualTypeArguments();

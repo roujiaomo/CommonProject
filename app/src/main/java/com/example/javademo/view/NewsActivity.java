@@ -1,9 +1,9 @@
 package com.example.javademo.view;
 
-import androidx.lifecycle.Observer;
-
 import android.content.Intent;
 import android.view.View;
+
+import androidx.lifecycle.Observer;
 
 import com.example.javademo.R;
 import com.example.javademo.base.BaseActivity;
@@ -20,7 +20,7 @@ public class NewsActivity extends BaseActivity<NewsViewModel, ActivityNewsBindin
     }
 
     @Override
-    public void initView(ActivityNewsBinding bindView) {
+    public void initView() {
         mBinding.setOnClickListener(this);
     }
 

@@ -32,6 +32,6 @@ public class NewsTypeAdapter extends BaseAdapter<NewsBean> {
     @Override
     protected void bindData(BaseViewHolder holder, int position, NewsBean newsBean) {
         ItemNewsBinding viewDataBinding = (ItemNewsBinding) holder.viewDataBinding;
-        viewDataBinding.tvInfo.setText("");
+        viewDataBinding.tvContent.setText("");
     }
 }

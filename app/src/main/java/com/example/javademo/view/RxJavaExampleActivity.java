@@ -37,8 +37,8 @@ public class RxJavaExampleActivity extends BaseActivity<NewsViewModel , Activity
     }
 
     @Override
-    public void initView(ActivityRxjavaExampleBinding bindView) {
-        bindView.setOnClickListener(this);
+    public void initView() {
+        mBinding.setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +63,7 @@ public class RxJavaExampleActivity extends BaseActivity<NewsViewModel , Activity
             case R.id.btn_zip_http:
                 doZipHttp();
                 break;
+
         }
     }
 

@@ -14,7 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.lazyfragment.MainActivity">
+        <activity android:name=".view.ServiceTestActivity"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity android:name=".view.AutoSizeTestActivity" /> <!-- 屏幕适配 -->
+        <!-- 下方两个dp值 dp = px / (DPI / 160) 通常就是设计图宽高像素值 /2 或 /3 -->
+        <!-- github文档: https://github.com/JessYanCoding/AndroidAutoSize/blob/master/README-zh.md -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="780" />
+
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +35,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ShareDataActivity" />
-        <activity android:name=".view.RxJavaExampleActivity" />
-        <activity android:name=".base.BaseActivity" />
-        <activity android:name=".view.NewsActivity">
-
+        <activity android:name=".view.RxJavaExampleActivity">
         </activity>
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".view.NewsActivity" />
+
+        <service android:name=".service.ExampleService" />
     </application>
 
 </manifest>

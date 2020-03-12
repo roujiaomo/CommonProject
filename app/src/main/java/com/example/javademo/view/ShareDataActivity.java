@@ -1,7 +1,9 @@
 package com.example.javademo.view;
 
-import androidx.lifecycle.Observer;
 import android.view.View;
+
+import androidx.lifecycle.Observer;
+
 import com.example.javademo.R;
 import com.example.javademo.base.BaseActivity;
 import com.example.javademo.bean.TranslationBean;
@@ -25,7 +27,7 @@ public class ShareDataActivity extends BaseActivity<NewsViewModel, ActivityShare
     }
 
     @Override
-    public void initView(ActivityShareDataBinding bindView) {
+    public void initView() {
         mBinding.setOnClickListener(this);
     }
 

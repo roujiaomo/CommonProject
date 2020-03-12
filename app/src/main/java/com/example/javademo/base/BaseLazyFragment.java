@@ -21,6 +21,13 @@ import com.example.javademo.widget.LoadingDialog;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * 基于Fragment setMaxLifecycle 的LazyFragment
+ * 此方式设置Fragment初始化最大生命周期走到onStart 在onResume处理数据请求等即可
+ * https://juejin.im/post/5cdb7c15f265da036c57ac66#heading-0
+ * @param <VM>
+ * @param <DB>
+ */
 public abstract class BaseLazyFragment<VM extends BaseViewModel, DB extends ViewDataBinding> extends Fragment {
 
     public Context mContext;
@@ -125,7 +132,7 @@ public abstract class BaseLazyFragment<VM extends BaseViewModel, DB extends View
     public abstract void initLiveDataObserve();
 
     /**
-     * 是否每次可见都请求数据  true每次重新请求数据 false 只第一次可见重新加载
+     * 是否每次可见都请求数据  true每次重新请求数据 false 只第一次可见加载数据
      * @return
      */
     public abstract boolean isReload();

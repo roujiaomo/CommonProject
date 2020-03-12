@@ -1,4 +1,4 @@
-package com.example.javademo.view.lazyfragment;
+package com.example.javademo.view;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -7,6 +7,9 @@ import com.example.javademo.R;
 import com.example.javademo.adapter.BaseFragmentPagerAdapter;
 import com.example.javademo.base.BaseActivity;
 import com.example.javademo.databinding.ActivityMainBinding;
+import com.example.javademo.view.lazyfragment.HomeFragment;
+import com.example.javademo.view.lazyfragment.ListFragment;
+import com.example.javademo.view.lazyfragment.MineFragment;
 import com.example.javademo.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     }
 
     @Override
-    public void initView(ActivityMainBinding bindView) {
+    public void initView() {
         mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("首页"));
         mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("列表"));
         mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("我的"));

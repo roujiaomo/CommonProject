@@ -18,38 +18,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-       >
-
+        android:orientation="vertical">
         <Button
-            android:id="@+id/btn_click"
+            android:id="@+id/btn_startService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="@{onClickListener}"
-            android:text="多次点击" />
-
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="请输入搜索内容"
-            android:padding="10dp" />
-
+            android:text="开启服务" />
         <Button
-            android:id="@+id/btn_round"
+            android:id="@+id/btn_stopService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="@{onClickListener}"
-            android:text="网络轮询" />
+            android:text="结束服务" />
+
         <Button
-            android:id="@+id/btn_zip_http"
+            android:id="@+id/btn_bindService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="@{onClickListener}"
-            android:text="并发网络请求" />
+            android:text="绑定服务" />
+        <Button
+            android:id="@+id/btn_unBindService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="@{onClickListener}"
+            android:text="解绑服务" />
     </LinearLayout>
 </layout>

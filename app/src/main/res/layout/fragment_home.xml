@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    <data>
+        <import type="android.view.View.OnClickListener" />
+        <import type="android.view.View" />
+        <variable
+            name="onClickListener"
+            type="OnClickListener" />
+    </data>
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         tools:context=".view.lazyfragment.HomeFragment">
-    </FrameLayout>
+        <Button
+            android:id="@+id/btn_test_autoSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳转到测试适配页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_test_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳转到测试适配页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+
 </layout>

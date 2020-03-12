@@ -12,6 +12,8 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tech.linjiang.pandora.Pandora;
+import tech.linjiang.pandora.network.OkHttpInterceptor;
 
 /**
  * Retrofit2工具类
@@ -58,9 +60,11 @@ public class HttpUtils {
                 .addHeaderParam("Connection", "Keep-Alive") //表示是否需要持久连接。
                 .addHeaderParam("Accept-Encoding", "gzip")//指定可以支持的web服务器返回内容压缩编码类型。
                 .build();
-
+        //摇一摇查看网络请求数据的拦截器
+        OkHttpInterceptor interceptor = Pandora.get().getInterceptor();
         return new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(interceptor)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)

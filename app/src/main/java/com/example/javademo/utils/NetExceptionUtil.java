@@ -12,6 +12,9 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import retrofit2.HttpException;
 
+/**
+ * 网络请求错误回调工具类
+ */
 public class NetExceptionUtil {
     private static  String errorMsg = "请求失败，请稍后重试" ;
     public static  int  errorCode = 0 ;
