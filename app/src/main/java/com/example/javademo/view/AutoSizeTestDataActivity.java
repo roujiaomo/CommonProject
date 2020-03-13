@@ -4,11 +4,11 @@ import android.util.Log;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.example.javademo.R;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.databinding.ActivityAutoSizeTestBinding;
 import com.example.javademo.viewmodel.AutoTestViewModel;
 
-public class AutoSizeTestActivity extends BaseActivity<AutoTestViewModel , ActivityAutoSizeTestBinding> {
+public class AutoSizeTestDataActivity extends BaseDataActivity<AutoTestViewModel , ActivityAutoSizeTestBinding> {
 
     @Override
     public int getLayoutId() {

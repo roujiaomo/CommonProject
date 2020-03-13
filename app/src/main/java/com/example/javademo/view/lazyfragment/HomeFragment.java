@@ -7,8 +7,8 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.example.javademo.R;
 import com.example.javademo.base.BaseLazyFragment;
 import com.example.javademo.databinding.FragmentHomeBinding;
-import com.example.javademo.view.AutoSizeTestActivity;
-import com.example.javademo.view.ServiceTestActivity;
+import com.example.javademo.view.AutoSizeTestDataActivity;
+import com.example.javademo.view.ServiceTestDataActivity;
 import com.example.javademo.viewmodel.MainViewModel;
 
 public class HomeFragment extends BaseLazyFragment<MainViewModel, FragmentHomeBinding> implements View.OnClickListener {
@@ -40,10 +40,10 @@ public class HomeFragment extends BaseLazyFragment<MainViewModel, FragmentHomeBi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_test_autoSize:
-                ActivityUtils.startActivity(AutoSizeTestActivity.class);
+                ActivityUtils.startActivity(AutoSizeTestDataActivity.class);
                 break;
             case R.id.btn_test_service:
-                ActivityUtils.startActivity(ServiceTestActivity.class);
+                ActivityUtils.startActivity(ServiceTestDataActivity.class);
                 break;
 
         }

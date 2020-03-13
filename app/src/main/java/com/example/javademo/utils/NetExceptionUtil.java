@@ -56,6 +56,8 @@ public class NetExceptionUtil {
         } else {
             msg = httpException.message();
         }
+        errorCode = ErrorStatus.SERVER_ERROR;
+
         return msg;
     }
 }

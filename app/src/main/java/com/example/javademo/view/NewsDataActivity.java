@@ -6,12 +6,12 @@ import android.view.View;
 import androidx.lifecycle.Observer;
 
 import com.example.javademo.R;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.bean.TranslationBean;
 import com.example.javademo.databinding.ActivityNewsBinding;
 import com.example.javademo.viewmodel.NewsViewModel;
 
-public class NewsActivity extends BaseActivity<NewsViewModel, ActivityNewsBinding> implements View.OnClickListener {
+public class NewsDataActivity extends BaseDataActivity<NewsViewModel, ActivityNewsBinding> implements View.OnClickListener {
     private NewsViewModel newsViewModel;
 
     @Override
@@ -40,12 +40,11 @@ public class NewsActivity extends BaseActivity<NewsViewModel, ActivityNewsBindin
                 mViewModel.getNews();
                 break;
             case R.id.btn_jump_shareData:
-                startActivity(new Intent(this,ShareDataActivity.class));
+                startActivity(new Intent(this, ShareDataDataActivity.class));
                 break;
             case R.id.btn_jump_rxJavaExample:
-                startActivity(new Intent(this,RxJavaExampleActivity.class));
+                startActivity(new Intent(this, RxJavaExampleDataActivity.class));
                 break;
-
         }
     }
 

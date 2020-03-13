@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.javademo.R;
 import com.example.javademo.adapter.BaseFragmentPagerAdapter;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.databinding.ActivityMainBinding;
 import com.example.javademo.view.lazyfragment.HomeFragment;
 import com.example.javademo.view.lazyfragment.ListFragment;
@@ -15,7 +15,7 @@ import com.example.javademo.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> {
+public class MainDataActivity extends BaseDataActivity<MainViewModel, ActivityMainBinding> {
 
     private List<Fragment> mFragments;
     private HomeFragment homeFragment;

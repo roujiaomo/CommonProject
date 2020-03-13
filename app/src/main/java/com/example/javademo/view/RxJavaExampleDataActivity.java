@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.javademo.R;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.base.BaseResponse;
 import com.example.javademo.bean.TranslationBean;
 import com.example.javademo.bean.WeatherBean;
@@ -28,7 +28,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxJavaExampleActivity extends BaseActivity<NewsViewModel , ActivityRxjavaExampleBinding> implements View.OnClickListener {
+public class RxJavaExampleDataActivity extends BaseDataActivity<NewsViewModel , ActivityRxjavaExampleBinding> implements View.OnClickListener {
 
     private static final String TAG = "RxJavaExampleActivity";
     @Override

@@ -8,9 +8,19 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-public class ExampleService extends Service  {
+/**
+ * 服务示例
+ * <p/>
+ * 如果同时使用startService 与bindService 方法启动Service，需要终止该Service时，
+ * 要调用stopService 和unbindService 方法（unbindService 依附于启动它的Context，
+ * startService并不依附于启动它的Context。如果先调用unbindService ，这时服务并不会被终止，
+ * 当调用stopService 后，服务才会被终止；如果先调用stopService ，服务也不会被终止，
+ * 当调用unbindService 或者之前调用bindService 的Context不存在了（如Activity被finish掉了）服务才会自动停止）
+ */
+public class ExampleService extends Service {
 
     private static final String TAG = "ExampleService";
+
     /**
      * 无论哪种启动方式 , 该方法都只走一次
      */
@@ -48,6 +58,7 @@ public class ExampleService extends Service  {
 
     /**
      * 手动调用unBindService() ,默认走onUnbind() -> onDestroy()
+     *
      * @param intent
      * @return
      */
@@ -70,14 +81,13 @@ public class ExampleService extends Service  {
     /**
      * 与Activity通信的方法
      */
-    public void fromActivity(){
+    public void fromActivity() {
         Log.d(TAG, "Activity里调用Service方法");
     }
 
 
-
     public class MyBinder extends Binder {
-        public ExampleService getService(){
+        public ExampleService getService() {
             return ExampleService.this;
         }
     }

@@ -7,7 +7,7 @@ import android.content.Context;
 public class LoadingDialog {
     private ProgressDialog progressDialog;
 
-    public LoadingDialog(Context context ) {
+    public LoadingDialog(Context context) {
         progressDialog = new ProgressDialog(context);
         //依次设置标题,内容,是否用取消按钮关闭,是否显示进度
         progressDialog.setCancelable(true);

@@ -5,12 +5,12 @@ import android.view.View;
 import androidx.lifecycle.Observer;
 
 import com.example.javademo.R;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.bean.TranslationBean;
 import com.example.javademo.databinding.ActivityShareDataBinding;
 import com.example.javademo.viewmodel.NewsViewModel;
 
-public class ShareDataActivity extends BaseActivity<NewsViewModel, ActivityShareDataBinding> implements View.OnClickListener{
+public class ShareDataDataActivity extends BaseDataActivity<NewsViewModel, ActivityShareDataBinding> implements View.OnClickListener{
 
 
     @Override

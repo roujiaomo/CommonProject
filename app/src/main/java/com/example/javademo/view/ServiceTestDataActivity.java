@@ -8,12 +8,12 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ServiceUtils;
 import com.example.javademo.R;
-import com.example.javademo.base.BaseActivity;
+import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.base.BaseViewModel;
 import com.example.javademo.databinding.ActivityTestServiceBinding;
 import com.example.javademo.service.ExampleService;
 
-public class ServiceTestActivity extends BaseActivity<BaseViewModel ,ActivityTestServiceBinding> implements View.OnClickListener {
+public class ServiceTestDataActivity extends BaseDataActivity<BaseViewModel ,ActivityTestServiceBinding> implements View.OnClickListener {
     @Override
     public int getLayoutId() {
         return R.layout.activity_test_service;
