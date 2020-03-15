@@ -11,7 +11,7 @@ import com.example.javademo.bean.TranslationBean;
 import com.example.javademo.databinding.ActivityNewsBinding;
 import com.example.javademo.viewmodel.NewsViewModel;
 
-public class NewsDataActivity extends BaseDataActivity<NewsViewModel, ActivityNewsBinding> implements View.OnClickListener {
+public class NewsActivity extends BaseDataActivity<NewsViewModel, ActivityNewsBinding> implements View.OnClickListener {
     private NewsViewModel newsViewModel;
 
     @Override
@@ -40,10 +40,10 @@ public class NewsDataActivity extends BaseDataActivity<NewsViewModel, ActivityNe
                 mViewModel.getNews();
                 break;
             case R.id.btn_jump_shareData:
-                startActivity(new Intent(this, ShareDataDataActivity.class));
+                startActivity(new Intent(this, ShareDataActivity.class));
                 break;
             case R.id.btn_jump_rxJavaExample:
-                startActivity(new Intent(this, RxJavaExampleDataActivity.class));
+                startActivity(new Intent(this, RxJavaExampleActivity.class));
                 break;
         }
     }

@@ -15,9 +15,10 @@ import com.example.javademo.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainDataActivity extends BaseDataActivity<MainViewModel, ActivityMainBinding> {
+public class MainActivity extends BaseDataActivity<MainViewModel, ActivityMainBinding> {
 
-    private List<Fragment> mFragments;
+    private List<String> tabTitle ; //tab标题栏
+    private List<Fragment> mFragments; //Vp切换的Fragment集合
     private HomeFragment homeFragment;
     private ListFragment listFragment;
     private MineFragment mineFragment;
@@ -30,9 +31,7 @@ public class MainDataActivity extends BaseDataActivity<MainViewModel, ActivityMa
 
     @Override
     public void initView() {
-        mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("首页"));
-        mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("列表"));
-        mBinding.tlTabs.addTab(mBinding.tlTabs.newTab().setText("我的"));
+
     }
 
     @Override
@@ -44,9 +43,13 @@ public class MainDataActivity extends BaseDataActivity<MainViewModel, ActivityMa
         mFragments.add(homeFragment);
         mFragments.add(listFragment);
         mFragments.add(mineFragment);
+        tabTitle = new ArrayList<>();
+        tabTitle.add("首页");
+        tabTitle.add("列表");
+        tabTitle.add("我的");
         // 懒加载第二个参数要传   FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         mAdapter  = new BaseFragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                mFragments);
+                mFragments ,tabTitle);
         mBinding.vpTabs.setAdapter(mAdapter);
         mBinding.vpTabs.setOffscreenPageLimit(mFragments.size()-1);
         mBinding.tlTabs.setupWithViewPager(mBinding.vpTabs);

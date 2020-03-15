@@ -17,7 +17,7 @@ import java.util.List;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter<T>.BaseViewHolder> {
 
-    private Context mContext;
+    public Context mContext;
     private int layoutId; //item布局(当多布局时 , 布局的type值为layoutId值)
     private LayoutInflater mLayoutInflater;
     private List<T> mList = new ArrayList<>();//数据源

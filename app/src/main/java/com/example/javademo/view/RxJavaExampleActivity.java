@@ -28,7 +28,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxJavaExampleDataActivity extends BaseDataActivity<NewsViewModel , ActivityRxjavaExampleBinding> implements View.OnClickListener {
+public class RxJavaExampleActivity extends BaseDataActivity<NewsViewModel , ActivityRxjavaExampleBinding> implements View.OnClickListener {
 
     private static final String TAG = "RxJavaExampleActivity";
     @Override

@@ -50,8 +50,6 @@ public abstract class BaseDataActivity<VM extends BaseViewModel, DB extends View
     }
 
     private void initLoadStatus(){
-        centerProgressDialog = DialogUtil.getProgressDialog("加载中",mContext);
-        centerProgressDialog.show();
 
         LoadStatusLiveData loadStatusLiveData = LoadStatusLiveData.getInstance();
         loadStatusLiveData.observe(this, new Observer<Integer>() {

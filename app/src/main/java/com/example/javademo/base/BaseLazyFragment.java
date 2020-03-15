@@ -31,7 +31,7 @@ import java.lang.reflect.Type;
 public abstract class BaseLazyFragment<VM extends BaseViewModel, DB extends ViewDataBinding> extends Fragment {
 
     public Context mContext;
-    public DB binding;
+    public DB mBinding;
     public VM mViewModel;
     private LoadingDialog loadingDialog;
     private boolean isFirstLoad = true; // 是否第一次加载
@@ -45,8 +45,8 @@ public abstract class BaseLazyFragment<VM extends BaseViewModel, DB extends View
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        return binding.getRoot();
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        return mBinding.getRoot();
     }
 
     @Override

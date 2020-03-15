@@ -35,14 +35,21 @@ public class ExampleService extends Service {
      * 重复调用时 , 会重复走该方法
      */
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand: ");
+    public int onStartCommand( Intent intent, int flags, int startId) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-
+                while (true){
+                    try {
+                        Log.d(TAG, "onStartCommand: ");
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        });
+        }).start();
         return super.onStartCommand(intent, flags, startId);
     }
 

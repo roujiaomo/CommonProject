@@ -8,7 +8,7 @@ import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.databinding.ActivityAutoSizeTestBinding;
 import com.example.javademo.viewmodel.AutoTestViewModel;
 
-public class AutoSizeTestDataActivity extends BaseDataActivity<AutoTestViewModel , ActivityAutoSizeTestBinding> {
+public class AutoSizeTestActivity extends BaseDataActivity<AutoTestViewModel , ActivityAutoSizeTestBinding> {
 
     @Override
     public int getLayoutId() {

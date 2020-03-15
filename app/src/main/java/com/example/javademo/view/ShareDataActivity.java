@@ -10,7 +10,7 @@ import com.example.javademo.bean.TranslationBean;
 import com.example.javademo.databinding.ActivityShareDataBinding;
 import com.example.javademo.viewmodel.NewsViewModel;
 
-public class ShareDataDataActivity extends BaseDataActivity<NewsViewModel, ActivityShareDataBinding> implements View.OnClickListener{
+public class ShareDataActivity extends BaseDataActivity<NewsViewModel, ActivityShareDataBinding> implements View.OnClickListener{
 
 
     @Override

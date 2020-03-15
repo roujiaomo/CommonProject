@@ -19,8 +19,8 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
     public DB mBinding;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         //未封装title栏
         initView();//初始化布局

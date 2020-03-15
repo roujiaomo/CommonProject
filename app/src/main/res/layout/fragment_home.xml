@@ -17,14 +17,42 @@
             android:id="@+id/btn_test_autoSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="跳转到测试适配页面"
+            android:text="测试适配页面"
             android:onClick="@{onClickListener}"
             android:layout_margin="10dp"/>
         <Button
             android:id="@+id/btn_test_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="跳转到测试适配页面"
+            android:text="测试服务页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_event_conflict1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="横向ScrollView 纵向RecyclerView页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_event_conflict2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="横向ViewPager 纵向RecyclerView页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_event_conflict3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="纵向ScrollView 纵向RecyclerView页面"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btn_event_conflict4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="纵向RecyclerView 纵向RecyclerView页面"
             android:onClick="@{onClickListener}"
             android:layout_margin="10dp"/>
     </LinearLayout>

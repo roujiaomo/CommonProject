@@ -13,7 +13,7 @@ import com.example.javademo.base.BaseViewModel;
 import com.example.javademo.databinding.ActivityTestServiceBinding;
 import com.example.javademo.service.ExampleService;
 
-public class ServiceTestDataActivity extends BaseDataActivity<BaseViewModel ,ActivityTestServiceBinding> implements View.OnClickListener {
+public class ServiceTestActivity extends BaseDataActivity<BaseViewModel ,ActivityTestServiceBinding> implements View.OnClickListener {
     @Override
     public int getLayoutId() {
         return R.layout.activity_test_service;

@@ -1,4 +1,4 @@
-package com.zx.touchevent
+package com.example.javademo.widget
 
 import android.content.Context
 import android.util.AttributeSet
