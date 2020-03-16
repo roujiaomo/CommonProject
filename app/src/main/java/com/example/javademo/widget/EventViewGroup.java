@@ -18,7 +18,10 @@ public class EventViewGroup extends ViewGroup {
 
     /**
      * Activity将事件传递过来
-     * 首先第一层调用 onInterceptTouchEvent 是否拦截事件(默认返回false/)
+     * 首先判断 if(disallowIntercept || !onInterceptTouchEvent(ev))
+     * disallowIntercept 为在子View中设置 默认为false 如果子类设置 disallowIntercept为true ,则事件向下分发
+     *
+     * 第一层调用 onInterceptTouchEvent 是否拦截事件(默认返回false)
      * (一)
      * 如果onInterceptTouchEvent返回false , 即未拦截, 则遍历该ViewGroup下所有View , 逐个调用子View的View.dispatchTouchEvent
      * 如果有一个子View的View.dispatchTouchEvent返回了True , 则代表被事件完成传递 , 事件在子View开始处理

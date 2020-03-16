@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <androidx.recyclerview.widget.RecyclerView
+            <com.example.javademo.widget.ChildRecyclerView
                 android:id="@+id/rv_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
