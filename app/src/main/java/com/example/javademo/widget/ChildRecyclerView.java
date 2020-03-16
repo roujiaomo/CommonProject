@@ -7,9 +7,36 @@ import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * 子 : 内层rv  父 : 外层rv
+ *
+ * 思路 : 拦截Rv的down和 move事件
+ * onTouchEvent()里 处理 move事件 :
+ * 当子Rv显示第一条且不能下拉时 , 把事件交给父Rv处理
+ * 当子Rv显示最后一条且不能上拉时 , 把事件交给父Rv处理
+ *
+ * Down事件 : (都不拦截)
+ * RecyclerView源码默认不拦截Down事件
+ * Down事件 从父Rv的 dispatchTouchEvent()方法传递到 子Rv的dispatchTouchEvent()方法
+ * 子Rv在 dispatchTouchEvent()调用子Rv的 onInterceptTouchEvent()方法 , 返回值为 super.onInterceptTouchEvent(ev) ,
+ * 返回值为true , 即自身并未拦截消费该事件 , 同时因为调用了 getParent().requestDisallowInterceptTouchEvent(true) ,
+ * 这时父Rv是无法拦截其余事件的.
+ *
+ * move事件 : (拦截根据情况消费或者返给父Rv消费)
+ * RecyclerView源码默认拦截 move事件
+ * 但由于在down里的设置 , 此时产生的move事件 ,全部由子Rv拦截 , 当产生一个move事件时 ,
+ * 判断这个事件的纵坐标的位置 :
+ * 如果子View滑动到第一条且不能下滑时 , 且手指是向下滑的( 当前纵坐标大于上次的纵坐标 )
+ * 或 滑动到最后一条且不能上滑时 ,且手指是向上滑的( 当前纵坐标小于上次的纵坐标 )
+ * 此时 调用 getParent().requestDisallowInterceptTouchEvent(false) ,即通知父Rv可以拦截了 ,下个move动作由父Rv处理
+ * 否则 由子Rv自己消费该事件 即内层滑动
+ *
+ *
+ *
+ */
 public class ChildRecyclerView extends RecyclerView {
     private static final String TAG = "ChildRecyclerView";
     private int lastVisibleItemPosition;
@@ -27,44 +54,12 @@ public class ChildRecyclerView extends RecyclerView {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d(TAG, "子RecyclerView : onInterceptTouchEvent ");
         switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN: //手指刚接触屏幕
+            case MotionEvent.ACTION_DOWN: //rv默认不拦截 (return super.onInterceptTouchEvent(ev) 为 false)
                 Log.d(TAG, "ACTION_DOWN: ");
-                getParent().requestDisallowInterceptTouchEvent(true); //通知父类不拦截 , 事件直接分发到该层
+                //通知父类不拦截 , 事件直接分发到该层 , 但是并未拦截 , 未消费
+                getParent().requestDisallowInterceptTouchEvent(true);
                 break;
-            case MotionEvent.ACTION_MOVE: //手指在屏幕上移动
-                Log.d(TAG, "ACTION_MOVE: ");
-                break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP: //手指在屏幕上离开的一瞬间
-                Log.d(TAG, "ACTION_UP: ");
-                getParent().requestDisallowInterceptTouchEvent(false);
-                break;
-        }
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    /**
-     * 思路 :
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "子RecyclerView : onTouchEvent ");
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "ACTION_DOWN: ");
-                getParent().requestDisallowInterceptTouchEvent(true); //通知父类不拦截 , 事件直接分发到该层
-                break;
-            case MotionEvent.ACTION_MOVE:
-                Log.d(TAG, "ACTION_MOVE: ");
-                float nowY = ev.getY();
-                isIntercept(nowY);
-                if (isParentIntercept) {
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                    return false;
-                } else {
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                }
-                mLastY = nowY;
+            case MotionEvent.ACTION_MOVE: //rv默认拦截 (return super.onInterceptTouchEvent(ev) 为 true)
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
@@ -72,15 +67,41 @@ public class ChildRecyclerView extends RecyclerView {
                 getParent().requestDisallowInterceptTouchEvent(false);
                 break;
         }
+        return super.onInterceptTouchEvent(ev);
+    }
 
 
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "子RecyclerView : onTouchEvent ");
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "ACTION_DOWN: ");
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.d(TAG, "ACTION_MOVE: ");
+                float nowY = ev.getY();
+                isIntercept(nowY);
+                mLastY = nowY;
+                if (isParentIntercept) { //需要父Rv拦截
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                    return false;
+                } else {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                    return true;
+                }
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                Log.d(TAG, "ACTION_UP: ");
+                getParent().requestDisallowInterceptTouchEvent(false);
+                break;
+        }
         return super.onTouchEvent(ev);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-//        //如果只这样处理 则父布局不拦截事件 当父布局的item过多时 父布局会无法滑动而无法展示完全内容
-//        getParent().requestDisallowInterceptTouchEvent(true);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -90,12 +111,12 @@ public class ChildRecyclerView extends RecyclerView {
     private void isIntercept(float nowY) {
         isParentIntercept = false;
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
+        if (layoutManager instanceof LinearLayoutManager) {
             //得到当前界面，最后一个子视图对应的position
-            lastVisibleItemPosition = ((GridLayoutManager) layoutManager)
+            lastVisibleItemPosition = ((LinearLayoutManager) layoutManager)
                     .findLastVisibleItemPosition();
             //得到当前界面，第一个子视图的position
-            firstVisibleItemPosition = ((GridLayoutManager) layoutManager)
+            firstVisibleItemPosition = ((LinearLayoutManager) layoutManager)
                     .findFirstVisibleItemPosition();
         }
         //得到当前界面可见数据的大小
@@ -111,7 +132,7 @@ public class ChildRecyclerView extends RecyclerView {
             }
             //向下滑时 当视图滑到第一条时 ,且不可向下滑动时 , 说明顶头了 ,  此时由父Rv拦截滑动事件
             else if (firstVisibleItemPosition == 0) {
-                if (ChildRecyclerView.this.canScrollVertically(-1    ) && nowY > mLastY) {
+                if (ChildRecyclerView.this.canScrollVertically(-1) && nowY > mLastY) {
                     // 不能向下滑动
                     isParentIntercept = true;
                 }
