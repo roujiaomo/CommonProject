@@ -11,6 +11,7 @@ import com.example.javademo.view.lazyfragment.HomeFragment;
 import com.example.javademo.view.lazyfragment.ListFragment;
 import com.example.javademo.view.lazyfragment.MineFragment;
 import com.example.javademo.viewmodel.MainViewModel;
+import com.example.javademo.widget.ProgressLoading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class MainActivity extends BaseDataActivity<MainViewModel, ActivityMainBi
 
     @Override
     public void initData() {
+        ProgressLoading    progressLoading = new ProgressLoading(this ,R.style.LightProgressDialog);
+        progressLoading.showMessage("sssssssssssssss");
         mFragments = new ArrayList<>();
         homeFragment = new HomeFragment();
         listFragment = new ListFragment();

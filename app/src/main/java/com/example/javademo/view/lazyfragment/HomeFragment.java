@@ -64,11 +64,4 @@ public class HomeFragment extends BaseLazyFragment<MainViewModel, FragmentHomeBi
         }
     }
 
-
-    @Override
-    public boolean isReload() {
-        return false;
-    }
-
-
 }

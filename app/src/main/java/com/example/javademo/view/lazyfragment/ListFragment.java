@@ -36,8 +36,8 @@ public class ListFragment extends BaseLazyFragment<MainViewModel, FragmentListBi
         for (int i = 0; i < 30; i++) {
             list.add("第" + i + "条");
         }
-        mBinding.rvContent.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter = new EventSampleRvAdapter(mContext, R.layout.item_event_sample);
+        mBinding.rvContent.setLayoutManager(new LinearLayoutManager(mActivity));
+        mAdapter = new EventSampleRvAdapter(mActivity, R.layout.item_event_sample);
         mBinding.rvContent.setAdapter(mAdapter);
         mAdapter.updateData(list,false);
     }
@@ -47,8 +47,4 @@ public class ListFragment extends BaseLazyFragment<MainViewModel, FragmentListBi
 
     }
 
-    @Override
-    public boolean isReload() {
-        return false;
-    }
 }

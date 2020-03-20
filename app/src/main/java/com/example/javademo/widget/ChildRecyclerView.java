@@ -31,7 +31,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * 判断这个事件的纵坐标的位置 :
  * 如果子View滑动到第一条且不能下滑时 , 且手指是向下滑的( 当前纵坐标大于上次的纵坐标 )
  * 或 滑动到最后一条且不能上滑时 ,且手指是向上滑的( 当前纵坐标小于上次的纵坐标 )
- * 此时 调用 getParent().requestDisallowInterceptTouchEvent(false) ,即通知父Rv可以拦截了 ,下个move动作由父Rv处理
+ * 此时 调用 getParent().requestDisallowInterceptTouchEvent(false) ,
+ *
+ * 父Rv拦截的第一个move事件 , 只是拦截到了 ,但并未消费(未走 onTouchEvent()) ,这个事件首先会被系统变成一个Cancel事件传递给子Rv,
+ * 当下个move事件被父Rv拦截后 , 父Rv才走开始处理事件 (走 onTouchEvent()) , 后续事件将直接传递给父Rv的onTouchEvent()处理，
+ * 而不会再传递给父Rv的onInterceptTouchEvent（），因该方法一旦返回一次true，就再也不会被调用了。
+ *
+ *
+ * 即通知父Rv可以拦截了 ,下个move动作由父Rv处理
  * 否则 由子Rv自己消费该事件 即内层滑动
  *
  *
@@ -84,10 +91,9 @@ public class ChildRecyclerView extends RecyclerView {
                 float nowY = ev.getY();
                 isIntercept(nowY);
                 mLastY = nowY;
-                if (isParentIntercept) { //需要父Rv拦截
+                if (isParentIntercept) { //自身未处理 , 需要父Rv拦截
                     getParent().requestDisallowInterceptTouchEvent(false);
-                    return false;
-                } else {
+                } else { //自身处理了
                     getParent().requestDisallowInterceptTouchEvent(true);
                     return true;
                 }

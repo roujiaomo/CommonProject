@@ -1,7 +1,5 @@
 package com.example.javademo.widget;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 
 import com.example.javademo.constant.LoadStatus;
@@ -9,6 +7,7 @@ import com.example.javademo.constant.LoadStatus;
 
 public class LoadStatusLiveData extends LiveData<Integer> {
     private static LoadStatusLiveData instance;
+
     public static LoadStatusLiveData getInstance() {
         if (instance == null) {
             instance = new LoadStatusLiveData();

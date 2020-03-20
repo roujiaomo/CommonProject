@@ -32,8 +32,4 @@ public class MineFragment extends BaseLazyFragment<MainViewModel, FragmentMineBi
 
     }
 
-    @Override
-    public boolean isReload() {
-        return true;
-    }
 }

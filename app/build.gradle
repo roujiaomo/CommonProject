@@ -52,4 +52,5 @@ dependencies {
     implementation 'me.jessyan:autosize:1.2.0'    //屏幕适配
     debugImplementation "com.github.whataa:pandora:androidx_v2.0.6" //查看网络数据 沙盒 视图工具
     implementation 'com.blankj:utilcodex:1.26.0' //全部工具类
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
 }
