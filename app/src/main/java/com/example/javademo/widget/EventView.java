@@ -69,6 +69,7 @@ public class EventView extends View {
         return super.onTouchEvent(event);
     }
 
+
     /**
      * 如果该View设置了 click事件 setOnclickListener ,则返回true ,否则返回false
      * @return

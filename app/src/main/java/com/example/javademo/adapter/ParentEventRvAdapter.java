@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ParentEventRvAdapter extends BaseAdapter<String> {
     private static final String TAG = "ParentEventRvAdapter";
-    private ChildEventRvAdapter childEventRvAdapter;
+//    private ChildEventRvAdapter childEventRvAdapter;
     private List<String> childList = new ArrayList<>();
     private LinearLayoutManager childGridLayoutManager;
 
@@ -35,7 +35,7 @@ public class ParentEventRvAdapter extends BaseAdapter<String> {
         childGridLayoutManager = new LinearLayoutManager(mContext);
         ( (ItemEventRecyclerviewBinding)holder.viewDataBinding).rvItem.
                 setLayoutManager(childGridLayoutManager);
-            childEventRvAdapter = new ChildEventRvAdapter(mContext, R.layout.item_event_sample);
+        ChildEventRvAdapter childEventRvAdapter = new ChildEventRvAdapter(mContext, R.layout.item_event_sample);
         ( (ItemEventRecyclerviewBinding)holder.viewDataBinding).rvItem.
                 setAdapter(childEventRvAdapter);
         childEventRvAdapter.updateData(childList ,true);

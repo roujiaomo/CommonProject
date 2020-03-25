@@ -13,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 子 : 内层rv  父 : 外层rv
- *
+ * <p>
  * 思路 : 拦截Rv的down和 move事件
  * onTouchEvent()里 处理 move事件 :
  * 当子Rv显示第一条且不能下拉时 , 把事件交给父Rv处理
  * 当子Rv显示最后一条且不能上拉时 , 把事件交给父Rv处理
- *
+ * <p>
  * Down事件 : (都不拦截)
  * RecyclerView源码默认不拦截Down事件
  * Down事件 从父Rv的 dispatchTouchEvent()方法传递到 子Rv的dispatchTouchEvent()方法
  * 子Rv在 dispatchTouchEvent()调用子Rv的 onInterceptTouchEvent()方法 , 返回值为 super.onInterceptTouchEvent(ev) ,
  * 返回值为true , 即自身并未拦截消费该事件 , 同时因为调用了 getParent().requestDisallowInterceptTouchEvent(true) ,
  * 这时父Rv是无法拦截其余事件的.
- *
+ * <p>
  * move事件 : (拦截根据情况消费或者返给父Rv消费)
  * RecyclerView源码默认拦截 move事件
  * 但由于在down里的设置 , 此时产生的move事件 ,全部由子Rv拦截 , 当产生一个move事件时 ,
@@ -33,17 +33,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * 如果子View滑动到第一条且不能下滑时 , 且手指是向下滑的( 当前纵坐标大于上次的纵坐标 )
  * 或 滑动到最后一条且不能上滑时 ,且手指是向上滑的( 当前纵坐标小于上次的纵坐标 )
  * 此时 调用 getParent().requestDisallowInterceptTouchEvent(false) ,
- *
+ * <p>
  * 父Rv拦截的第一个move事件 , 只是拦截到了 ,但并未消费(未走 onTouchEvent()) ,这个事件首先会被系统变成一个Cancel事件传递给子Rv,
  * 当下个move事件被父Rv拦截后 , 父Rv才走开始处理事件 (走 onTouchEvent()) , 后续事件将直接传递给父Rv的onTouchEvent()处理，
  * 而不会再传递给父Rv的onInterceptTouchEvent（），因该方法一旦返回一次true，就再也不会被调用了。
- *
- *
+ * <p>
+ * <p>
  * 即通知父Rv可以拦截了 ,下个move动作由父Rv处理
  * 否则 由子Rv自己消费该事件 即内层滑动
- *
- *
- *
  */
 public class ChildRecyclerView extends RecyclerView {
     private static final String TAG = "ChildRecyclerView";
@@ -64,7 +61,7 @@ public class ChildRecyclerView extends RecyclerView {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN: //rv默认不拦截 (return super.onInterceptTouchEvent(ev) 为 false)
                 Log.d(TAG, "ACTION_DOWN: ");
-                //通知父类不拦截 , 事件直接分发到该层 , 但是并未拦截 , 未消费
+                //这里我们默认不拦截 , return  super.onInterceptTouchEvent(ev) 的值也为false
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_MOVE: //rv默认拦截 (return super.onInterceptTouchEvent(ev) 为 true)
@@ -80,32 +77,32 @@ public class ChildRecyclerView extends RecyclerView {
 
 
     @Override
-public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         switch (action) {
-        case MotionEvent.ACTION_DOWN:
-        mLastY = event.getY();
-        //不允许父View拦截事件
-        getParent().requestDisallowInterceptTouchEvent(true);
-        break;
-        case MotionEvent.ACTION_MOVE:
-        float nowY = event.getY();
-        isIntercept(nowY);
-        if (isBottomToTop||isTopToBottom){
-        getParent().requestDisallowInterceptTouchEvent(false);
-        return false;
-        }else{
-        getParent().requestDisallowInterceptTouchEvent(true);
-        }
-        mLastY = nowY;
-        break;
-        case MotionEvent.ACTION_UP:
-        case MotionEvent.ACTION_CANCEL:
-        getParent().requestDisallowInterceptTouchEvent(false);
-        break;
+            //down事件都没有拦截 走到子Rv的onTouch()方法
+            case MotionEvent.ACTION_DOWN:
+                mLastY = event.getY();
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float nowY = event.getY();
+                isIntercept(nowY);
+                if (isBottomToTop || isTopToBottom) {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                    return false;
+                } else {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
+                mLastY = nowY;
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                getParent().requestDisallowInterceptTouchEvent(false);
+                break;
         }
         return super.onTouchEvent(event);
-        }
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -149,7 +146,8 @@ public boolean onTouchEvent(MotionEvent event) {
 
     private boolean isTopToBottom = false;
     private boolean isBottomToTop = false;
-    private void isIntercept2(float nowY){
+
+    private void isIntercept2(float nowY) {
 
         isTopToBottom = false;
         isBottomToTop = false;
@@ -167,7 +165,7 @@ public boolean onTouchEvent(MotionEvent event) {
         int visibleItemCount = layoutManager.getChildCount();
         //得到RecyclerView对应所有数据的大小
         int totalItemCount = layoutManager.getItemCount();
-        if (visibleItemCount>0) {
+        if (visibleItemCount > 0) {
             if (lastVisibleItemPosition == totalItemCount - 1) {
                 //最后视图对应的position等于总数-1时，说明上一次滑动结束时，触底了
                 if (canScrollVertically(-1) && nowY < mLastY) {
@@ -186,7 +184,7 @@ public boolean onTouchEvent(MotionEvent event) {
         }
     }
 
-    
+
     public ChildRecyclerView(@NonNull Context context) {
         super(context);
     }

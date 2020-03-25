@@ -14,10 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.eventdispatch.EventConflict1Activity"></activity>
-        <activity android:name=".view.CustomViewActivity">
-
-        </activity>
+        <activity android:name=".view.eventdispatch.EventSampleActivity"></activity>
+        <activity android:name=".view.eventdispatch.EventConflict1Activity" />
+        <activity android:name=".view.CustomViewActivity"></activity>
         <activity
             android:name=".view.ServiceTestActivity"
             android:launchMode="singleInstance" />
@@ -31,7 +30,7 @@
             android:name="design_height_in_dp"
             android:value="780" />
 
-        <activity android:name=".view.MainActivity" >
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,12 +40,10 @@
         <activity android:name=".view.ShareDataActivity" />
         <activity android:name=".view.RxJavaExampleActivity" />
         <activity android:name=".base.BaseDataActivity" />
-        <activity android:name=".view.NewsActivity"></activity>
+        <activity android:name=".view.NewsActivity" />
         <activity android:name=".view.eventdispatch.EventConflict3Activity" />
         <activity android:name=".view.eventdispatch.EventConflict2Activity" />
-        <activity android:name=".view.eventdispatch.EventConflict4Activity" >
-
-        </activity>
+        <activity android:name=".view.eventdispatch.EventConflict4Activity"></activity>
 
         <service android:name=".service.ExampleService" />
     </application>

@@ -55,6 +55,14 @@
             android:text="纵向RecyclerView 纵向RecyclerView页面"
             android:onClick="@{onClickListener}"
             android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/btn_event_sample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="事件分发详解"
+            android:onClick="@{onClickListener}"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
 
