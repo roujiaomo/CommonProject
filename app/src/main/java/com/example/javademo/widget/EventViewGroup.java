@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 
 /**
  * ViewGroup事件分发
- *  0-> ACTION_DOWN  1-> ACTION_UP  2-> ACTION_MOVE  3-> ACTION_CANCEL
+ *  0-> ACTION_DOWN  1-> ACTION_UP  2-> ACTION_MOVE 或
+ *  0-> ACTION_DOWN  1-> ACTION_UP  3-> ACTION_CANCEL(非人为的结束)
  */
 public class EventViewGroup extends ViewGroup {
 

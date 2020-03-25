@@ -37,7 +37,7 @@ public class MainActivity extends BaseDataActivity<MainViewModel, ActivityMainBi
 
     @Override
     public void initData() {
-        ProgressLoading    progressLoading = new ProgressLoading(this ,R.style.LightProgressDialog);
+        ProgressLoading  progressLoading = ProgressLoading.create(this);
         progressLoading.showMessage("sssssssssssssss");
         mFragments = new ArrayList<>();
         homeFragment = new HomeFragment();

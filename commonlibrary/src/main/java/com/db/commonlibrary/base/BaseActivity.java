@@ -31,7 +31,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         initView(mBinding);//初始化布局
         initData(); //初始化数据
-        initLiveDataObserve(); //请求返回数据处理
+        initLiveDataObserve(); //请求返回数据处理(observe形式监听)
     }
 
     private  void initViewModel(){

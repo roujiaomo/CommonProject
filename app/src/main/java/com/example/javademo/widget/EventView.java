@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 /**
  * View事件分发(区分于ViewGroup)
  * 手触碰屏幕到离开的一整套动作是一套事件序列 包含 :
- * 0-> ACTION_DOWN  1-> ACTION_UP  2-> ACTION_MOVE  (3-> ACTION_CANCEL).
+ *  *  0-> ACTION_DOWN  1-> ACTION_UP  2-> ACTION_MOVE 或
+ *  *  0-> ACTION_DOWN  1-> ACTION_UP  3-> ACTION_CANCEL(非人为的结束)
+ *
  * 每种动作都会触发一次 dispatchTouchEvent() 方法 即每个动作都是一个事件 都会进行分发
  *
  * View被点击时 , 首先判断View setOnTouchListener里onTouch的返回值

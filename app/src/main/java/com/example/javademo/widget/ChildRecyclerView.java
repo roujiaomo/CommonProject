@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -79,32 +80,32 @@ public class ChildRecyclerView extends RecyclerView {
 
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "子RecyclerView : onTouchEvent ");
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "ACTION_DOWN: ");
-                getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                Log.d(TAG, "ACTION_MOVE: ");
-                float nowY = ev.getY();
-                isIntercept(nowY);
-                mLastY = nowY;
-                if (isParentIntercept) { //自身未处理 , 需要父Rv拦截
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                } else { //自身处理了
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                    return true;
-                }
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-                Log.d(TAG, "ACTION_UP: ");
-                getParent().requestDisallowInterceptTouchEvent(false);
-                break;
+public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+        case MotionEvent.ACTION_DOWN:
+        mLastY = event.getY();
+        //不允许父View拦截事件
+        getParent().requestDisallowInterceptTouchEvent(true);
+        break;
+        case MotionEvent.ACTION_MOVE:
+        float nowY = event.getY();
+        isIntercept(nowY);
+        if (isBottomToTop||isTopToBottom){
+        getParent().requestDisallowInterceptTouchEvent(false);
+        return false;
+        }else{
+        getParent().requestDisallowInterceptTouchEvent(true);
         }
-        return super.onTouchEvent(ev);
-    }
+        mLastY = nowY;
+        break;
+        case MotionEvent.ACTION_UP:
+        case MotionEvent.ACTION_CANCEL:
+        getParent().requestDisallowInterceptTouchEvent(false);
+        break;
+        }
+        return super.onTouchEvent(event);
+        }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -138,7 +139,7 @@ public class ChildRecyclerView extends RecyclerView {
             }
             //向下滑时 当视图滑到第一条时 ,且不可向下滑动时 , 说明顶头了 ,  此时由父Rv拦截滑动事件
             else if (firstVisibleItemPosition == 0) {
-                if (ChildRecyclerView.this.canScrollVertically(-1) && nowY > mLastY) {
+                if (ChildRecyclerView.this.canScrollVertically(1) && nowY > mLastY) {
                     // 不能向下滑动
                     isParentIntercept = true;
                 }
@@ -146,6 +147,46 @@ public class ChildRecyclerView extends RecyclerView {
         }
     }
 
+    private boolean isTopToBottom = false;
+    private boolean isBottomToTop = false;
+    private void isIntercept2(float nowY){
+
+        isTopToBottom = false;
+        isBottomToTop = false;
+
+        RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            //得到当前界面，最后一个子视图对应的position
+            lastVisibleItemPosition = ((GridLayoutManager) layoutManager)
+                    .findLastVisibleItemPosition();
+            //得到当前界面，第一个子视图的position
+            firstVisibleItemPosition = ((GridLayoutManager) layoutManager)
+                    .findFirstVisibleItemPosition();
+        }
+        //得到当前界面可见数据的大小
+        int visibleItemCount = layoutManager.getChildCount();
+        //得到RecyclerView对应所有数据的大小
+        int totalItemCount = layoutManager.getItemCount();
+        if (visibleItemCount>0) {
+            if (lastVisibleItemPosition == totalItemCount - 1) {
+                //最后视图对应的position等于总数-1时，说明上一次滑动结束时，触底了
+                if (canScrollVertically(-1) && nowY < mLastY) {
+                    // 不能向上滑动
+                    isBottomToTop = true;
+                } else {
+                }
+            } else if (firstVisibleItemPosition == 0) {
+                //第一个视图的position等于0，说明上一次滑动结束时，触顶了
+                if (canScrollVertically(1) && nowY > mLastY) {
+                    // 不能向下滑动
+                    isTopToBottom = true;
+                } else {
+                }
+            }
+        }
+    }
+
+    
     public ChildRecyclerView(@NonNull Context context) {
         super(context);
     }
