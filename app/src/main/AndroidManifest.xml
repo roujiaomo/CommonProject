@@ -14,9 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.eventdispatch.EventSampleActivity"></activity>
+        <activity android:name=".view.CustomImageViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.eventdispatch.EventSampleActivity" />
         <activity android:name=".view.eventdispatch.EventConflict1Activity" />
-        <activity android:name=".view.CustomViewActivity"></activity>
+        <activity android:name=".view.CustomViewActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".view.ServiceTestActivity"
             android:launchMode="singleInstance" />
@@ -28,14 +42,19 @@
             android:value="360" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="780" />
-
+            android:value="780" /> <!-- ===============沉浸式状态栏适配===================== -->
+        <!-- 适配全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" /> <!-- ===============沉浸式状态栏适配===================== -->
         <activity android:name=".view.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.ShareDataActivity" />
         <activity android:name=".view.RxJavaExampleActivity" />

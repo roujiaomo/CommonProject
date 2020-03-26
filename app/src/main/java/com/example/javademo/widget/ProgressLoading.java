@@ -19,15 +19,16 @@ public class ProgressLoading extends Dialog {
     private static AnimationDrawable animDrawable = null;
     private static int gravity;
     private static Window window;
-
+    private static ProgressLoading mDialog;
     public ProgressLoading(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-        gravity = getWindow().getAttributes().gravity;
         window = getWindow();
+        gravity = window.getAttributes().gravity;
+
     }
 
     public static ProgressLoading create(Context context) {
-        ProgressLoading mDialog = new ProgressLoading(context, R.style.LightProgressDialog);
+         mDialog = new ProgressLoading(context, R.style.LightProgressDialog);
         //设置布局
         mDialog.setContentView(R.layout.common_progress_dialog);
         mDialog.setCancelable(true);
@@ -53,8 +54,9 @@ public class ProgressLoading extends Dialog {
         显示加载信息
      */
     public void showMessage(String msg) {
-        findViewById(R.id.tv_Message).setVisibility(View.VISIBLE);
-        ((TextView) findViewById(R.id.tv_Message)).setText(msg);
+        mDialog.findViewById(R.id.tv_Message).setVisibility(View.VISIBLE);
+        ((TextView) mDialog.findViewById(R.id.tv_Message)).setText(msg);
+        showLoading();
     }
 
     /*

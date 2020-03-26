@@ -10,9 +10,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.example.javademo.R;
 import com.example.javademo.constant.LoadStatus;
 import com.example.javademo.utils.DialogUtil;
 import com.example.javademo.widget.ProgressLoading;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -34,6 +36,11 @@ public abstract class BaseDataActivity<VM extends BaseViewModel, DB extends View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.title_blue)
+                 .statusBarAlpha(0.2f)  //状态栏透明度，不写默认0.0f
+                .fitsSystemWindows(true)
+                .init();
         mContext = this;
         progressLoading = DialogUtil.getProgressDialog(mContext);
         initViewModel(); //初始化ViewModel
@@ -67,19 +74,19 @@ public abstract class BaseDataActivity<VM extends BaseViewModel, DB extends View
                         progressLoading.showMessage("正在请求");
                         break;
                     case LoadStatus.STATUS_CONTENT: //加载完成
-                        if(progressLoading.isShowing()){
+                        if (progressLoading.isShowing()) {
                             progressLoading.hideLoading();
                         }
                         break;
                     case LoadStatus.STATUS_EMPTY:
                         break;
                     case LoadStatus.STATUS_ERROR: //服务器错误
-                        if(progressLoading.isShowing()){
+                        if (progressLoading.isShowing()) {
                             progressLoading.hideLoading();
                         }
                         break;
                     case LoadStatus.STATUS_NO_NETWORK: //网络错误
-                        if(progressLoading.isShowing()){
+                        if (progressLoading.isShowing()) {
                             progressLoading.hideLoading();
                         }
                         break;

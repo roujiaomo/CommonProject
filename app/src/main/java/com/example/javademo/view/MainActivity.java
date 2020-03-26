@@ -1,7 +1,5 @@
 package com.example.javademo.view;
 
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
@@ -9,13 +7,10 @@ import com.example.javademo.R;
 import com.example.javademo.adapter.BaseFragmentPagerAdapter;
 import com.example.javademo.base.BaseDataActivity;
 import com.example.javademo.databinding.ActivityMainBinding;
-import com.example.javademo.java.design_patterns.factory.factory_method.FactoryMethod;
-import com.example.javademo.java.design_patterns.factory.factory_method.SampleFactoryStore;
 import com.example.javademo.view.lazyfragment.HomeFragment;
 import com.example.javademo.view.lazyfragment.ListFragment;
 import com.example.javademo.view.lazyfragment.MineFragment;
 import com.example.javademo.viewmodel.MainViewModel;
-import com.example.javademo.widget.ProgressLoading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +36,6 @@ public class MainActivity extends BaseDataActivity<MainViewModel, ActivityMainBi
 
     @Override
     public void initData() {
-        ProgressLoading  progressLoading = ProgressLoading.create(this);
-        progressLoading.showMessage("sssssssssssssss");
         mFragments = new ArrayList<>();
         homeFragment = new HomeFragment();
         listFragment = new ListFragment();

@@ -1,7 +1,6 @@
 package com.example.javademo.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +8,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.example.javademo.R;
+import com.gyf.immersionbar.ImmersionBar;
 
 /**
  * 普通Activity 无网络请求 (例 : 主页宿主Activity )
@@ -21,6 +22,11 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.title_blue)
+                .statusBarAlpha(0.2f)  //状态栏透明度，不写默认0.0f
+                .fitsSystemWindows(true)
+                .init();
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         //未封装title栏
         initView();//初始化布局

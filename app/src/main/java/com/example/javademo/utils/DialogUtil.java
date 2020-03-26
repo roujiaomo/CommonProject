@@ -2,7 +2,6 @@ package com.example.javademo.utils;
 
 import android.content.Context;
 
-import com.example.javademo.R;
 import com.example.javademo.widget.ProgressLoading;
 
 
@@ -14,8 +13,8 @@ public class DialogUtil {
      * @param context
      */
     public static ProgressLoading getProgressDialog(Context context) {
-        ProgressLoading progressLoading = new ProgressLoading(context ,R.style.LightProgressDialog);
-        return progressLoading;
+        return ProgressLoading.create(context);
     }
+
 
 }
