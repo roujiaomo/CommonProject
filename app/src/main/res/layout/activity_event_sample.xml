@@ -7,18 +7,14 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.eventdispatch.EventSampleActivity">
-        <com.example.javademo.widget.OutViewGroup
+        <com.example.javademo.widget.eventdispatch.InViewGroup
             android:id="@+id/vg_out"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.example.javademo.widget.InViewGroup
-                android:id="@+id/vg_in"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </com.example.javademo.widget.OutViewGroup>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.example.javademo.widget.eventdispatch.InViewGroup>
+    </RelativeLayout>
 </layout>

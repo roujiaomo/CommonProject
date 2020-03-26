@@ -43,7 +43,6 @@
         <activity android:name=".view.NewsActivity" />
         <activity android:name=".view.eventdispatch.EventConflict3Activity" />
         <activity android:name=".view.eventdispatch.EventConflict2Activity" />
-        <activity android:name=".view.eventdispatch.EventConflict4Activity"></activity>
 
         <service android:name=".service.ExampleService" />
     </application>

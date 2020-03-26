@@ -1,9 +1,10 @@
-package com.example.javademo.widget;
+package com.example.javademo.widget.eventdispatch;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 
 public class InViewGroup extends ViewGroup {
@@ -24,7 +25,7 @@ public class InViewGroup extends ViewGroup {
                 Log.d(TAG, "内层ViewGroup dispatchTouchEvent: ACTION_UP");
                 break;
         }
-        Log.d(TAG, "内层ViewGroup dispatchTouchEvent返回值: " + super.dispatchTouchEvent(ev));
+//        Log.d(TAG, "内层ViewGroup dispatchTouchEvent返回值: " + super.dispatchTouchEvent(ev));
         return super.dispatchTouchEvent(ev);
     }
 
@@ -44,7 +45,7 @@ public class InViewGroup extends ViewGroup {
                 Log.d(TAG, "内层ViewGroup onTouchEvent: ACTION_UP");
                 break;
         }
-        Log.d(TAG, "内层ViewGroup onTouchEvent返回值: "+  super.onTouchEvent(ev));
+//        Log.d(TAG, "内层ViewGroup onTouchEvent返回值: "+  super.onTouchEvent(ev));
         return super.onTouchEvent(ev);
     }
 
@@ -64,7 +65,7 @@ public class InViewGroup extends ViewGroup {
                 Log.d(TAG, "内层ViewGroup onInterceptTouchEvent: ACTION_UP");
                 break;
         }
-        Log.d(TAG, "内层ViewGroup onInterceptTouchEvent返回值: "+  super.onInterceptTouchEvent(ev));
+//        Log.d(TAG, "内层ViewGroup onInterceptTouchEvent返回值: "+  super.onInterceptTouchEvent(ev));
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -81,7 +82,54 @@ public class InViewGroup extends ViewGroup {
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec) {
+        // 计算出所有的childView的宽和高
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
+        //测量并保存layout的宽高(使用getDefaultSize时，wrap_content和match_perent都是填充屏幕)
+        //稍后会重新写这个方法，能达到wrap_content的效果
+        setMeasuredDimension( getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        final int count = getChildCount();
+        int childMeasureWidth = 0;
+        int childMeasureHeight = 0;
+        int layoutWidth = 0;    // 容器已经占据的宽度
+        int layoutHeight = 0;   // 容器已经占据的宽度
+        int maxChildHeight = 0; //一行中子控件最高的高度，用于决定下一行高度应该在目前基础上累加多少
+        for(int i = 0; i<count; i++){
+            View child = getChildAt(i);
+            //注意此处不能使用getWidth和getHeight，这两个方法必须在onLayout执行完，才能正确获取宽高
+            childMeasureWidth = child.getMeasuredWidth();
+            childMeasureHeight = child.getMeasuredHeight();
+            if(layoutWidth<getWidth()){
+                //如果一行没有排满，继续往右排列
+                left = layoutWidth;
+                right = left+childMeasureWidth;
+                top = layoutHeight;
+                bottom = top+childMeasureHeight;
+            } else{
+                //排满后换行
+                layoutWidth = 0;
+                layoutHeight += maxChildHeight;
+                maxChildHeight = 0;
+
+                left = layoutWidth;
+                right = left+childMeasureWidth;
+                top = layoutHeight;
+                bottom = top+childMeasureHeight;
+            }
+
+            layoutWidth += childMeasureWidth;  //宽度累加
+            if(childMeasureHeight>maxChildHeight){
+                maxChildHeight = childMeasureHeight;
+            }
+
+            //确定子控件的位置，四个参数分别代表（左上右下）点的坐标值
+            child.layout(left, top, right, bottom);
+        }
 
     }
 }

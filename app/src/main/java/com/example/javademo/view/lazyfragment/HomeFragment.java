@@ -12,7 +12,6 @@ import com.example.javademo.view.ServiceTestActivity;
 import com.example.javademo.view.eventdispatch.EventConflict1Activity;
 import com.example.javademo.view.eventdispatch.EventConflict2Activity;
 import com.example.javademo.view.eventdispatch.EventConflict3Activity;
-import com.example.javademo.view.eventdispatch.EventConflict4Activity;
 import com.example.javademo.view.eventdispatch.EventSampleActivity;
 import com.example.javademo.viewmodel.MainViewModel;
 
@@ -58,9 +57,6 @@ public class HomeFragment extends BaseLazyFragment<MainViewModel, FragmentHomeBi
                 break;
             case R.id.btn_event_conflict3:
                 ActivityUtils.startActivity(EventConflict3Activity.class);
-                break;
-            case R.id.btn_event_conflict4:
-                ActivityUtils.startActivity(EventConflict4Activity.class);
                 break;
             case R.id.btn_event_sample:
                 ActivityUtils.startActivity(EventSampleActivity.class);
