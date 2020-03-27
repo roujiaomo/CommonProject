@@ -1,4 +1,4 @@
-package com.example.javademo.widget.eventdispatch;
+package com.example.javademo.widget.event_dispatch;
 
 import android.content.Context;
 import android.util.AttributeSet;

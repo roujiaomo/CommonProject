@@ -15,7 +15,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.eventdispatch.EventConflict3Activity">
+        tools:context=".view.event_dispatch.EventConflict3Activity">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

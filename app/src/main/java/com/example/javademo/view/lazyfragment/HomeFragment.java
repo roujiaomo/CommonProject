@@ -9,10 +9,10 @@ import com.example.javademo.base.BaseLazyFragment;
 import com.example.javademo.databinding.FragmentHomeBinding;
 import com.example.javademo.view.AutoSizeTestActivity;
 import com.example.javademo.view.ServiceTestActivity;
-import com.example.javademo.view.eventdispatch.EventConflict1Activity;
-import com.example.javademo.view.eventdispatch.EventConflict2Activity;
-import com.example.javademo.view.eventdispatch.EventConflict3Activity;
-import com.example.javademo.view.eventdispatch.EventSampleActivity;
+import com.example.javademo.view.event_dispatch.EventConflict1Activity;
+import com.example.javademo.view.event_dispatch.EventConflict2Activity;
+import com.example.javademo.view.event_dispatch.EventConflict3Activity;
+import com.example.javademo.view.event_dispatch.EventSampleActivity;
 import com.example.javademo.viewmodel.MainViewModel;
 
 public class HomeFragment extends BaseLazyFragment<MainViewModel, FragmentHomeBinding> implements View.OnClickListener {

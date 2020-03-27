@@ -1,4 +1,4 @@
-package com.example.javademo.view.eventdispatch;
+package com.example.javademo.view.event_dispatch;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
