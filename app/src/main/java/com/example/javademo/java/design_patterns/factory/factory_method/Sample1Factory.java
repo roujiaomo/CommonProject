@@ -1,7 +1,8 @@
 package com.example.javademo.java.design_patterns.factory.factory_method;
 
-import com.example.javademo.java.design_patterns.factory.SampleInterface;
+
 import com.example.javademo.java.design_patterns.factory.Sample1;
+import com.example.javademo.java.design_patterns.factory.SampleInterface;
 
 /**
  *

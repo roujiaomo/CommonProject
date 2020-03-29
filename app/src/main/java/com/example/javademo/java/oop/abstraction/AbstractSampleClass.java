@@ -1,7 +1,5 @@
 package com.example.javademo.java.oop.abstraction;
 
-import com.example.javademo.java.LogUtils;
-
 /**
  * 抽象
  * <p>
@@ -62,6 +60,7 @@ class SampleUtil extends BaseUtil{
         this.eventCallBack = eventCallBack;
     }
 }
+
 /**
  * 接口 多用于 代码解耦
  */

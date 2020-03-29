@@ -5,8 +5,6 @@ import com.example.javademo.java.design_patterns.factory.Sample2;
 import com.example.javademo.java.design_patterns.factory.Sample3;
 import com.example.javademo.java.design_patterns.factory.SampleInterface;
 
-import static com.blankj.utilcode.util.FileUtils.getFileExtension;
-
 /**
  * 简单工厂模式
  *

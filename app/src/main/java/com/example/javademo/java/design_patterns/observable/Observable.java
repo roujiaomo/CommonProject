@@ -1,4 +1,4 @@
-package com.example.javademo.source_code.rxjava;
+package com.example.javademo.java.design_patterns.observable;
 
 /**
  * 观察者模式 :  被观察者 订阅 观察者

@@ -72,7 +72,7 @@ public class EventViewGroup extends ViewGroup {
     }
 
     /**
-     * 返回false事件未被消费
+     * 返回false事件未被消费 如果down事件返回false 则接下来事件流的事件都不能处理
      * @param event
      * @return
      */

@@ -8,29 +8,31 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 线程池工具类
+ * 线程池工具类(设置关联cpu数量: 让app在不同手机上活跃程度相同)
  */
 public class ThreadPoolManage {
 
     private HashMap<String, ThreadPoolExecutor> threadPoolMap = new HashMap<>();
 
     /**
-     * cpu数量
+     * 最小线程数量 这里设置为cpu数量
      */
     private int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+
+
+    /**
+     * 最大线程数 这里设置为手机CPU数量×2+1
+     */
+    private int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
 
     /**
      * 核心线程数为手机CPU数量+1
      */
     private int CORE_POOL_SIZE = CPU_COUNT + 1;
 
-    /**
-     * 最大线程数为手机CPU数量×2+1
-     */
-    private int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
 
     /**
-     * 线程活跃时间 秒，超时线程会被回收
+     * 线程活跃时间 秒，超时线程会被回收(一个线程运行完之后, 操作系统多长时间后处理它 销毁或复用)
      */
     private long KEEP_ALIVE_TIME = 3;
 

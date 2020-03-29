@@ -1,6 +1,5 @@
-package com.example.javademo.source_code.rxjava;
+package com.example.javademo.java.design_patterns.observable;
 
-import android.util.Log;
 
 import com.example.javademo.java.LogUtils;
 
