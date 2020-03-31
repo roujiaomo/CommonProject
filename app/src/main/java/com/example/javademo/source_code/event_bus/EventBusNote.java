@@ -4,6 +4,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+/**
+ *   https://juejin.im/post/5db7d789f265da4cf1583315#heading-33
+ */
 public class EventBusNote {
 
     public void registerEventBus() {
