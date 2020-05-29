@@ -101,7 +101,7 @@ public abstract class BaseDataActivity<VM extends BaseViewModel, DB extends View
      *
      * @return 布局资源ID
      */
-    public abstract int getLayoutId();
+    public abstract int  getLayoutId();
 
     /**
      * 初始化界面
