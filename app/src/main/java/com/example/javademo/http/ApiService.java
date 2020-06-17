@@ -40,7 +40,8 @@ public interface ApiService {
     Observable<BaseResponse<TranslationBean>> getNews();
 
 //  appKey  3ee5b1f1af26cb1baab51209970eac46
-
+@GET(".php?a=fy&f=auto&t=auto&w=hello%20fuck")
+Observable<BaseResponse<TranslationBean>> getNewsss();
     @GET("index")
     Observable<WeatherBean> getWeather(@Query("cityname") String cityname, @Query("key") String key);
 
