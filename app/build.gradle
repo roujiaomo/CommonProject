@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -20,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -58,5 +62,5 @@ dependencies {
 
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'//沉浸式状态栏
     implementation 'org.greenrobot:eventbus:3.1.1'
-
+    implementation 'org.aspectj:aspectjrt:1.8.4'
 }
